@@ -115,3 +115,4 @@ body[data-side="closed"] .side .lbl { display: none; }
 .big b { order: -1; font-size: 1.2rem; }
 .bigrow { width: 620px; max-width: calc(100vw - 300px); }
 @media (max-width: 700px) { .bigrow { width: auto; max-width: none; } }
+.yrpick button:disabled { opacity: 0.3; cursor: default; }

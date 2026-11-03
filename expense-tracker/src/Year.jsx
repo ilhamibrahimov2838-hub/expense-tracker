@@ -23,7 +23,7 @@ export default function Year({ items }) {
       <div className="yrpick">
         <button onClick={() => setYear(year - 1)}>‹</button>
         <b>{year}</b>
-        <button onClick={() => setYear(year + 1)}>›</button>
+        <button disabled={year >= new Date().getFullYear()} onClick={() => setYear(year + 1)}>›</button>
       </div>
       <Donut data={yearCats} size={170} />
       <h2>Spent per month</h2>

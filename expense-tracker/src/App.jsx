@@ -102,7 +102,7 @@ export default function App() {
             <option key={c}>{c}</option>
           ))}
         </select>
-        <input type="date" required min="2000-01-01" max="2099-12-31" value={date} onChange={(e) => setDate(e.target.value)} />
+        <input type="date" required min="2000-01-01" max={today} value={date} onChange={(e) => setDate(e.target.value)} />
         <input placeholder="Note (optional)" value={note} onChange={(e) => setNote(e.target.value)} />
         <button className="add" type="submit">Add expense</button>
       </form>

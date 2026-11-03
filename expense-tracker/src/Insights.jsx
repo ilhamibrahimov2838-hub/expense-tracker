@@ -30,7 +30,7 @@ export default function Insights({ items }) {
   return (
     <div className="ins">
       <h1>Insights</h1>
-      <input type="month" value={month} onChange={(e) => setMonth(e.target.value)} />
+      <input type="month" max={nowKey} value={month} onChange={(e) => setMonth(e.target.value)} />
       <div className="stats">
         <div><small>Spent</small><b>{money(total)}</b></div>
         <div><small>Entries</small><b>{inMonth.length}</b></div>
