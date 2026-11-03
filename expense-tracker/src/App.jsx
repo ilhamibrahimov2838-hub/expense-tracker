@@ -43,6 +43,7 @@ export default function App() {
 
   async function signUp() {
     setMessage('')
+    if (email === '' || password.length < 6) { setMessage('Type your email and a password of 6+ characters first.'); return }
     const { data, error } = await supabase.auth.signUp({ email, password })
     if (error) setMessage(error.message)
     else if (!data.session) setMessage('Check your email to confirm, then log in.')
