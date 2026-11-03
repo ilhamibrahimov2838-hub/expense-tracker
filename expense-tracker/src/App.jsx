@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import { supabase } from './supabase'
-import Charts from './Charts'; import './App.css'
+import Charts from './Charts'; import Side from './Side'; import Insights from './Insights'; import './App.css'
 
 const CATEGORIES = ['Food', 'Transport', 'Housing', 'Bills', 'Health', 'Fun', 'Shopping', 'Other']
 
 export default function App() {
   const today = new Date().toLocaleDateString('en-CA')
   const [session, setSession] = useState(null)
-  const [ready, setReady] = useState(false)
+  const [ready, setReady] = useState(false); const [tab, setTab] = useState('expenses')
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
@@ -93,6 +93,8 @@ export default function App() {
   return (
     <>
       <h1>Expense Tracker</h1>
+      <Side tab={tab} setTab={setTab} />
+      {tab === "insights" ? <Insights items={items} /> : <>
       <form onSubmit={addItem}>
         <input type="number" step="0.01" required placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} />
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
@@ -124,7 +126,7 @@ export default function App() {
         </ul>
       )}
 
-      <button className="link" onClick={() => supabase.auth.signOut()}>Log out</button>
+      </>}
     </>
   )
 }
