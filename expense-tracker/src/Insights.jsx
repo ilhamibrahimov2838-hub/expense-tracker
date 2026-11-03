@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState } from 'react'; import Donut from './Donut'
 
 const COLORS = {
   Food: '#e4572e', Transport: '#2e86de', Housing: '#8e5bd4', Bills: '#f2a900',
@@ -7,7 +7,7 @@ const COLORS = {
 const money = (n) => '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
 export default function Insights({ items }) {
-  const [month, setMonth] = useState(new Date().toLocaleDateString('en-CA').slice(0, 7))
+  const [month, setMonth] = useState(new Date().toLocaleDateString('en-CA').slice(0, 7)); const [sel, setSel] = useState(null)
   const inMonth = items.filter((i) => i.date.slice(0, 7) === month)
   const total = inMonth.reduce((s, i) => s + Number(i.amount), 0)
   const [y, m] = month.split('-').map(Number)
@@ -37,7 +37,7 @@ export default function Insights({ items }) {
         <div><small>Per day</small><b>{money(perDay)}</b></div>
         <div><small>vs last month</small><b>{change === null ? '–' : (change > 0 ? '+' : '') + change + '%'}</b></div>
       </div>
-      <h2>By category</h2>
+      <Donut data={byCat} size={200} /><h2>By category</h2>
       {cats.length === 0 && <p className="empty">No spending in this month.</p>}
       {cats.map((c) => (
         <div key={c} className="catrow">
@@ -48,18 +48,18 @@ export default function Insights({ items }) {
       <h2>Daily spending</h2>
       <div className="days">
         {daily.map((v, idx) => (
-          <div key={idx} className="d" title={'Day ' + (idx + 1) + ': ' + money(v)}>
-            <div className="dfill" style={{ height: Math.round((v / maxDay) * 80) + 'px' }} />
+          <div key={idx} className="d" onClick={() => setSel(sel === idx ? null : idx)} title={'Day ' + (idx + 1) + ': ' + money(v)}>
+            {sel === idx && <em className="tip">Day {idx + 1}: {money(v)}</em>}<div className="dfill" style={{ height: Math.round((v / maxDay) * 80) + 'px' }} />
           </div>
         ))}
       </div>
       <h2>Biggest expenses</h2>
-      {top.map((i) => (
+      <div className="bigrow">{top.map((i) => (
         <div key={i.id} className="big">
           <span>{i.category}<small>{i.date}{i.note ? ' · ' + i.note : ''}</small></span>
           <b>{money(i.amount)}</b>
         </div>
-      ))}
+      ))}</div>
     </div>
   )
 }

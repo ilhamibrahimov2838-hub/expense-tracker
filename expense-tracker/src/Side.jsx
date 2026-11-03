@@ -28,6 +28,8 @@ export default function Side({ tab, setTab }) {
       </div>
       {item('expenses', 'Expenses', 'M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01')}
       {item('insights', 'Insights', 'M3 3v18h18M8 17v-6M13 17V7M18 17v-4')}
+      {item('year', 'Year', 'M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z')}
+      {item('profile', 'Profile', 'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z')}
       <div className="sp" />
       <button className="item" onClick={() => supabase.auth.signOut()} title="Log out">
         <Icon d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />

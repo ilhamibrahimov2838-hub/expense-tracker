@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from './supabase'
-import Charts from './Charts'; import Side from './Side'; import Insights from './Insights'; import './App.css'
+import Charts from './Charts'; import Side from './Side'; import Insights from './Insights'; import Year from './Year'; import Profile from './Profile'; import './App.css'
 
 const CATEGORIES = ['Food', 'Transport', 'Housing', 'Bills', 'Health', 'Fun', 'Shopping', 'Other']
 
@@ -94,7 +94,7 @@ export default function App() {
     <>
       <h1>Expense Tracker</h1>
       <Side tab={tab} setTab={setTab} />
-      {tab === "insights" ? <Insights items={items} /> : <>
+      {tab === "insights" ? <Insights items={items} /> : tab === "year" ? <Year items={items} /> : tab === "profile" ? <Profile session={session} items={items} /> : <>
       <form onSubmit={addItem}>
         <input type="number" step="0.01" required placeholder="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} />
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
@@ -108,7 +108,7 @@ export default function App() {
       </form>
 
       {message && <p className="msg">{message}</p>}
-      <Charts items={items} /><p className="total">Total: ${total.toFixed(2)}</p>
+      <p className="total">Total: ${total.toFixed(2)}</p>
 
       {items.length === 0 ? (
         <p className="empty">No expenses yet. Add your first one above.</p>
