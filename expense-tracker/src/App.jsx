@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from './supabase'
-import './App.css'
+import Charts from './Charts'; import './App.css'
 
 const CATEGORIES = ['Food', 'Transport', 'Housing', 'Bills', 'Health', 'Fun', 'Shopping', 'Other']
 
@@ -106,7 +106,7 @@ export default function App() {
       </form>
 
       {message && <p className="msg">{message}</p>}
-      <p className="total">Total: ${total.toFixed(2)}</p>
+      <Charts items={items} /><p className="total">Total: ${total.toFixed(2)}</p>
 
       {items.length === 0 ? (
         <p className="empty">No expenses yet. Add your first one above.</p>
