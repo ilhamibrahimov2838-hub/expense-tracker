@@ -116,3 +116,6 @@ body[data-side="closed"] .side .lbl { display: none; }
 .bigrow { width: 620px; max-width: calc(100vw - 300px); }
 @media (max-width: 700px) { .bigrow { width: auto; max-width: none; } }
 .yrpick button:disabled { opacity: 0.3; cursor: default; }
+.bsub { margin-top: 4px; font-size: 0.8rem; color: #999; }
+.rm { background: none; border: 0; color: #999; text-decoration: underline; font-size: 0.8rem; padding: 0; }
+.bform { margin-top: 14px; }

@@ -1,4 +1,4 @@
-import { useState } from 'react'; import Donut from './Donut'
+import { useState } from 'react'; import Donut from './Donut'; import Budgets from './Budgets'
 
 const COLORS = {
   Food: '#e4572e', Transport: '#2e86de', Housing: '#8e5bd4', Bills: '#f2a900',
@@ -45,7 +45,7 @@ export default function Insights({ items }) {
           <div className="track"><div className="fillbar" style={{ width: (byCat[c] / total) * 100 + '%', background: COLORS[c] || '#888' }} /></div>
         </div>
       ))}
-      <h2>Daily spending</h2>
+      <Budgets byCat={byCat} /><h2>Daily spending</h2>
       <div className="days">
         {daily.map((v, idx) => (
           <div key={idx} className="d" onClick={() => setSel(sel === idx ? null : idx)} title={'Day ' + (idx + 1) + ': ' + money(v)}>
