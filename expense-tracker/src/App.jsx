@@ -22,7 +22,7 @@ export default function App() {
       setSession(data.session)
       setReady(true)
     })
-    const { data } = supabase.auth.onAuthStateChange((_event, s) => setSession(s))
+    const { data } = supabase.auth.onAuthStateChange((ev, s) => { setSession(s); if (ev === 'PASSWORD_RECOVERY') setTab('profile') })
     return () => data.subscription.unsubscribe()
   }, [])
 
@@ -47,6 +47,12 @@ export default function App() {
     const { data, error } = await supabase.auth.signUp({ email, password })
     if (error) setMessage(error.message)
     else if (!data.session) setMessage('Check your email to confirm, then log in.')
+  }
+
+  async function forgot() {
+    if (email === '') { setMessage('Type your email first, then click Forgot password.'); return }
+    const { error } = await supabase.auth.resetPasswordForEmail(email, { redirectTo: window.location.origin })
+    setMessage(error ? error.message : 'Check your email for a reset link.')
   }
 
   async function logIn(e) {
@@ -85,6 +91,7 @@ export default function App() {
           <input type="password" required minLength={6} placeholder="Password (6+ characters)" value={password} onChange={(e) => setPassword(e.target.value)} />
           <button className="add" type="submit">Log in</button>
           <button className="link" type="button" onClick={signUp}>Create account</button>
+          <button className="link" type="button" onClick={forgot}>Forgot password?</button>
         </form>
         {message && <p className="msg">{message}</p>}
       </>
