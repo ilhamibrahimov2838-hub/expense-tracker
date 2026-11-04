@@ -137,3 +137,4 @@ body[data-side="closed"] .side .lbl { display: none; }
   .bigrow { width: auto; max-width: none; }
   .ins:has(.who) { max-width: 640px; }
 }
+.side .logo { width: 28px; height: 28px; }

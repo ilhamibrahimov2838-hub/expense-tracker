@@ -25,7 +25,7 @@ export default function Side({ tab, setTab }) {
         <button className="tog" onClick={() => setOpen(!open)} title="Toggle sidebar">
           <Icon d="M5 4h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zM9 4v16" />
         </button>
-        <span className="lbl name">Ledger</span>
+        <img src="/logo.svg" alt="" className="lbl logo" /><span className="lbl name">Ledger</span>
       </div>
       {item('expenses', 'Expenses', 'M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01')}
       {item('insights', 'Insights', 'M3 3v18h18M8 17v-6M13 17V7M18 17v-4')}
