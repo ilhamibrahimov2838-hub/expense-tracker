@@ -7,7 +7,7 @@ const CATEGORIES = ['Food', 'Transport', 'Housing', 'Bills', 'Health', 'Fun', 'S
 export default function App() {
   const today = new Date().toLocaleDateString('en-CA')
   const [session, setSession] = useState(null)
-  const [ready, setReady] = useState(false); const [tab, setTab] = useState('expenses')
+  const [ready, setReady] = useState(false); const [tab, setTab] = useState('expenses'); const [editId, setEditId] = useState(null)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [message, setMessage] = useState('')
@@ -66,10 +66,13 @@ export default function App() {
     e.preventDefault()
     const value = parseFloat(amount)
     if (!(value > 0)) return
-    const { error } = await supabase.from('expenses').insert({ amount: value, category, date, note })
+    const row = { amount: value, category, date, note }
+    const { error } = editId ? await supabase.from('expenses').update(row).eq('id', editId) : await supabase.from('expenses').insert(row)
     if (error) { setMessage(error.message); return }
     setAmount('')
     setNote('')
+    if (editId) setDate(today)
+    setEditId(null)
     loadItems()
   }
 
@@ -112,7 +115,7 @@ export default function App() {
         </select>
         <input type="date" required min="2000-01-01" max={today} value={date} onChange={(e) => setDate(e.target.value)} />
         <input placeholder="Note (optional)" value={note} onChange={(e) => setNote(e.target.value)} />
-        <button className="add" type="submit">Add expense</button>
+        <button className="add" type="submit">{editId ? 'Save changes' : 'Add expense'}</button>{editId && <button className="link" type="button" onClick={() => { setEditId(null); setAmount(''); setNote(''); setDate(today) }}>Cancel</button>}
       </form>
 
       {message && <p className="msg">{message}</p>}
@@ -128,7 +131,7 @@ export default function App() {
                 ${Number(item.amount).toFixed(2)} · {item.category}
                 <small>{item.date}{item.note ? ' · ' + item.note : ''}</small>
               </div>
-              <button className="del" onClick={() => removeItem(item.id)}>Delete</button>
+              <button className="ed" onClick={() => { setEditId(item.id); setAmount(String(item.amount)); setCategory(item.category); setDate(item.date); setNote(item.note || ''); window.scrollTo(0, 0) }}>Edit</button><button className="del" onClick={() => removeItem(item.id)}>Delete</button>
             </li>
           ))}
         </ul>
