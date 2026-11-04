@@ -1,5 +1,6 @@
 import { t, setLang, loc, LANGS } from './i18n'
 import { useState } from 'react'
+import { getTheme, setTheme } from './theme'
 import { SYMBOLS, NAMES, cur } from './currency'
 import { supabase } from './supabase'
 
@@ -7,6 +8,7 @@ export default function Profile({ session, items }) {
   const user = session.user
   const [name, setName] = useState((user.user_metadata && user.user_metadata.name) || '')
   const [pw, setPw] = useState('')
+  const [theme, setThemeState] = useState(getTheme())
   const [currency, setCurrency] = useState((user.user_metadata && user.user_metadata.currency) || 'USD')
   const [msg, setMsg] = useState('')
   const [language, setLanguage] = useState((user.user_metadata && user.user_metadata.language) || 'en')
@@ -44,6 +46,7 @@ export default function Profile({ session, items }) {
       <form onSubmit={saveName}>
         <input placeholder={t('Display name')} value={name} onChange={(e) => setName(e.target.value)} />
         <select value={currency} onChange={(e) => setCurrency(e.target.value)}>{Object.keys(SYMBOLS).map((c) => <option key={c} value={c}>{c} ({SYMBOLS[c].trim()}) · {NAMES[c]}</option>)}</select>
+        <select value={theme} aria-label={t('Theme')} onChange={(e) => { setThemeState(e.target.value); setTheme(e.target.value) }}><option value="light">{t('Light')}</option><option value="dark">{t('Dark')}</option></select>
         <select value={language} onChange={(e) => setLanguage(e.target.value)}>{Object.keys(LANGS).map((c) => <option key={c} value={c}>{LANGS[c]}</option>)}</select>
         <button className="add" type="submit">{t('Save profile')}</button>
       </form>

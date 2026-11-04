@@ -18,7 +18,7 @@ export default function Donut({ data, size = 160, color }) {
   }).join(',')
 
   return (
-    <div className="dn" style={{ width: size, height: size, boxShadow: color && total > 0 ? '0 0 8px ' + color + '44' : 'none', background: total > 0 ? 'conic-gradient(' + stops + ')' : '#262626' }}>
+    <div className="dn" style={{ width: size, height: size, boxShadow: color && total > 0 ? '0 0 8px ' + color + '44' : 'none', background: total > 0 ? 'conic-gradient(' + stops + ')' : 'var(--track)' }}>
       <b style={{ fontSize: Math.max(11, size * 0.13) }}>{total > 0 ? cur() + short(total) : '–'}</b>
     </div>
   )

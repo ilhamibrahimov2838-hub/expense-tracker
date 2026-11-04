@@ -1,3 +1,6 @@
 :root { --background: #0a0a0a; --foreground: #ededed; color-scheme: dark; }
 * { box-sizing: border-box; }
-body { margin: 0; background: var(--background); color: var(--foreground); font-family: Arial, Helvetica, sans-serif; line-height: 1.5; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: Arial, Helvetica, sans-serif; line-height: 1.5; }
+:root { --bg: #0a0a0a; --text: #ededed; --panel: #1f1f1f; --line: #333; --line2: #555; --on: #383838; --hover: #2b2b2b; --track: #262626; --muted: #999; --ph: #777; --link: #9db4ff; --err: #ffb4b4; --cardline: #fff; --accent: #2f5cf0; --accent2: #4a73ff; }
+body[data-theme="light"] { --bg: #fffbf5; --text: #3a2f2a; --panel: #ffffff; --line: #f0e2d2; --line2: #e2cdb8; --on: #ffe9d2; --hover: #fff1e2; --track: #f5e9da; --muted: #7a6a5f; --ph: #7a6a5f; --link: #a63d12; --err: #b3261e; --cardline: #f0e2d2; --accent: #c94a1a; --accent2: #e0612f; color-scheme: light; }
+html:has(body[data-theme="light"]) { color-scheme: light; }

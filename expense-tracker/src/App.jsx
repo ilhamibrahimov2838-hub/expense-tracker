@@ -1,6 +1,8 @@
 import { t, setLang } from './i18n'
 import { useEffect, useState } from 'react'
 import { supabase } from './supabase'
+import './theme'
+import Hero from './Hero'
 import { setCur, cur } from './currency'
 import Charts from './Charts'; import Side from './Side'; import Insights from './Insights'; import Year from './Year'; import Profile from './Profile'; import './App.css'
 
@@ -110,6 +112,7 @@ export default function App() {
       <h1>{t('Expense Tracker')}</h1>
       <Side tab={tab} setTab={setTab} />
       {tab === "insights" ? <Insights items={items} /> : tab === "year" ? <Year items={items} /> : tab === "profile" ? <Profile session={session} items={items} /> : <>
+      <Hero items={items} />
       <form onSubmit={addItem}>
         <input type="number" step="0.01" required placeholder={t('Amount')} value={amount} onChange={(e) => setAmount(e.target.value)} />
         <select value={category} onChange={(e) => setCategory(e.target.value)}>
