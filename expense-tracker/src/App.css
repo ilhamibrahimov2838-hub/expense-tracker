@@ -138,3 +138,31 @@ body[data-side="closed"] .side .lbl { display: none; }
   .ins:has(.who) { max-width: 640px; }
 }
 .side .logo { width: 28px; height: 28px; }
+@media (max-width: 700px) {
+  #root { max-width: none; padding: 32px 20px 24px; }
+  h1 { font-size: 2.1rem; text-align: left; margin: 0 0 20px; }
+  h2, .ins h2 { font-size: 1.5rem; margin: 30px 0 14px; }
+  input, select { font-size: 18px; padding: 15px 16px; border-radius: 12px; }
+  input[type="date"] { display: block; width: 100%; min-width: 0; max-width: 100%; -webkit-appearance: none; appearance: none; text-align: left; min-height: 54px; }
+  .add, .ghost { padding: 16px; font-size: 1.15rem; border-radius: 12px; }
+  .total { font-size: 1.6rem; text-align: left; margin: 30px 0 14px; }
+  li { padding: 18px 20px; border-radius: 14px; font-size: 1.1rem; }
+  li small { font-size: 0.9rem; margin-top: 4px; }
+  .del, .ed { font-size: 1.1rem; }
+}
+@media (max-width: 700px) {
+  .ins input[type="month"] { font-size: 17px; padding: 10px 14px; }
+  .ins .stats { gap: 12px; }
+  .ins .stats div { padding: 16px; border-radius: 14px; }
+  .ins .stats small { font-size: 0.95rem; }
+  .ins .stats b { font-size: 1.6rem; }
+  .catrow .top { font-size: 1.05rem; }
+  .track { height: 12px; border-radius: 6px; }
+  .big { width: 190px; padding: 16px; border-radius: 14px; }
+  .big b { font-size: 1.5rem; }
+  .stats3 div { padding: 14px; border-radius: 14px; }
+  .side svg { width: 26px; height: 26px; }
+  .side, body[data-side="closed"] .side { height: auto; min-height: 76px; padding: 8px 6px 10px; }
+  .side .item { font-size: 0.8rem; gap: 4px; }
+  body[data-side] { padding-bottom: 96px; }
+}
