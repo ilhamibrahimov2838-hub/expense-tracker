@@ -1,3 +1,4 @@
+import { t } from './i18n'
 import { useEffect, useState } from 'react'
 import { supabase } from './supabase'
 
@@ -12,7 +13,7 @@ export default function Side({ tab, setTab }) {
     return () => { delete document.body.dataset.side }
   }, [open])
 
-  const item = (id, label, d) => (
+  const item = (id, en, d, label = t(en)) => (
     <button className={'item' + (tab === id ? ' on' : '')} onClick={() => setTab(id)} title={label}>
       <Icon d={d} /><span className="lbl">{label}</span>
     </button>
@@ -31,9 +32,9 @@ export default function Side({ tab, setTab }) {
       {item('year', 'Year', 'M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z')}
       {item('profile', 'Profile', 'M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2M12 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z')}
       <div className="sp" />
-      <button className="item" onClick={() => supabase.auth.signOut()} title="Log out">
+      <button className="item" onClick={() => supabase.auth.signOut()} title={t('Log out')}>
         <Icon d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" />
-        <span className="lbl">Log out</span>
+        <span className="lbl">{t('Log out')}</span>
       </button>
     </nav>
   )

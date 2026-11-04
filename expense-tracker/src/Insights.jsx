@@ -1,10 +1,11 @@
-import { useState } from 'react'; import Donut from './Donut'; import Budgets from './Budgets'
+import { t } from './i18n'
+import { useState } from 'react'; import { cur } from './currency'; import Donut from './Donut'; import Budgets from './Budgets'
 
 const COLORS = {
   Food: '#e4572e', Transport: '#2e86de', Housing: '#8e5bd4', Bills: '#f2a900',
   Health: '#17a589', Fun: '#d6409f', Shopping: '#5d7b8a', Other: '#9a8c7a',
 }
-const money = (n) => '$' + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+const money = (n) => cur() + Number(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
 
 export default function Insights({ items }) {
   const [month, setMonth] = useState(new Date().toLocaleDateString('en-CA').slice(0, 7)); const [sel, setSel] = useState(null)
@@ -29,34 +30,34 @@ export default function Insights({ items }) {
 
   return (
     <div className="ins">
-      <h1>Insights</h1>
+      <h1>{t('Insights')}</h1>
       <input type="month" max={nowKey} value={month} onChange={(e) => setMonth(e.target.value)} />
       <div className="stats">
-        <div><small>Spent</small><b>{money(total)}</b></div>
-        <div><small>Entries</small><b>{inMonth.length}</b></div>
-        <div><small>Per day</small><b>{money(perDay)}</b></div>
-        <div><small>vs last month</small><b>{change === null ? '–' : (change > 0 ? '+' : '') + change + '%'}</b></div>
+        <div><small>{t('Spent')}</small><b>{money(total)}</b></div>
+        <div><small>{t('Entries')}</small><b>{inMonth.length}</b></div>
+        <div><small>{t('Per day')}</small><b>{money(perDay)}</b></div>
+        <div><small>{t('vs last month')}</small><b>{change === null ? '–' : (change > 0 ? '+' : '') + change + '%'}</b></div>
       </div>
-      <Donut data={byCat} size={200} /><h2>By category</h2>
-      {cats.length === 0 && <p className="empty">No spending in this month.</p>}
+      <Donut data={byCat} size={200} /><h2>{t('By category')}</h2>
+      {cats.length === 0 && <p className="empty">{t('No spending in this month.')}</p>}
       {cats.map((c) => (
         <div key={c} className="catrow">
-          <div className="top"><span>{c}</span><span>{money(byCat[c])} · {Math.round((byCat[c] / total) * 100)}%</span></div>
+          <div className="top"><span>{t(c)}</span><span>{money(byCat[c])} · {Math.round((byCat[c] / total) * 100)}%</span></div>
           <div className="track"><div className="fillbar" style={{ width: (byCat[c] / total) * 100 + '%', background: COLORS[c] || '#888' }} /></div>
         </div>
       ))}
-      <Budgets byCat={byCat} /><h2>Daily spending</h2>
+      <Budgets byCat={byCat} /><h2>{t('Daily spending')}</h2>
       <div className="days">
         {daily.map((v, idx) => (
-          <div key={idx} className="d" onClick={() => setSel(sel === idx ? null : idx)} title={'Day ' + (idx + 1) + ': ' + money(v)}>
-            {sel === idx && <em className="tip">Day {idx + 1}: {money(v)}</em>}<div className="dfill" style={{ height: Math.round((v / maxDay) * 80) + 'px' }} />
+          <div key={idx} className="d" onClick={() => setSel(sel === idx ? null : idx)} title={t('Day') + ' ' + (idx + 1) + ': ' + money(v)}>
+            {sel === idx && <em className="tip">{t('Day')} {idx + 1}: {money(v)}</em>}<div className="dfill" style={{ height: Math.round((v / maxDay) * 80) + 'px' }} />
           </div>
         ))}
       </div>
-      <h2>Biggest expenses</h2>
+      <h2>{t('Biggest expenses')}</h2>
       <div className="bigrow">{top.map((i) => (
         <div key={i.id} className="big">
-          <span>{i.category}<small>{i.date}{i.note ? ' · ' + i.note : ''}</small></span>
+          <span>{t(i.category)}<small>{i.date}{i.note ? ' · ' + i.note : ''}</small></span>
           <b>{money(i.amount)}</b>
         </div>
       ))}</div>

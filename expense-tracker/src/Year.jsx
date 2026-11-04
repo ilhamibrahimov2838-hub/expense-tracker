@@ -1,9 +1,12 @@
+import { t, monthNames } from './i18n'
 import { useState } from 'react'
+import { cur } from './currency'
 import Donut from './Donut'
 
-const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
 
 export default function Year({ items }) {
+  const MONTHS = monthNames()
   const [year, setYear] = useState(new Date().getFullYear()); const [sel, setSel] = useState(null)
   const inYear = items.filter((i) => i.date.slice(0, 4) === String(year))
   const yearCats = {}
@@ -19,23 +22,23 @@ export default function Year({ items }) {
 
   return (
     <div className="ins">
-      <h1>Year</h1>
+      <h1>{t('Year')}</h1>
       <div className="yrpick">
         <button onClick={() => setYear(year - 1)}>‹</button>
         <b>{year}</b>
         <button disabled={year >= new Date().getFullYear()} onClick={() => setYear(year + 1)}>›</button>
       </div>
       <Donut data={yearCats} size={170} />
-      <h2>Spent per month</h2>
+      <h2>{t('Spent per month')}</h2>
       <div className="mbars">
         {perMonth.map((m, idx) => (
-          <div key={idx} className="mb" onClick={() => setSel(sel === idx ? null : idx)} title={'$' + m.total.toFixed(2)}>
-            {sel === idx && <em className="tip">${m.total.toLocaleString('en-US', { maximumFractionDigits: 2 })}</em>}<div className="mfill" style={{ height: Math.round((m.total / max) * 90) + 'px', background: MCOLORS[idx], boxShadow: '0 0 6px ' + MCOLORS[idx] + '55' }} />
+          <div key={idx} className="mb" onClick={() => setSel(sel === idx ? null : idx)} title={cur() + m.total.toFixed(2)}>
+            {sel === idx && <em className="tip">{cur()}{m.total.toLocaleString('en-US', { maximumFractionDigits: 2 })}</em>}<div className="mfill" style={{ height: Math.round((m.total / max) * 90) + 'px', background: MCOLORS[idx], boxShadow: '0 0 6px ' + MCOLORS[idx] + '55' }} />
             <span>{MONTHS[idx]}</span>
           </div>
         ))}
       </div>
-      <h2>Each month</h2>
+      <h2>{t('Each month')}</h2>
       <div className="minis">
         {perMonth.map((m, idx) => (
           <div key={idx} className="mini"><Donut data={m.cats} size={64} color={MCOLORS[idx]} /><span>{MONTHS[idx]}</span></div>

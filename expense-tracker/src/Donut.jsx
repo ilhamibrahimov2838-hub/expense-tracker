@@ -1,3 +1,5 @@
+import { cur } from './currency'
+
 export const COLORS = {
   Food: '#e4572e', Transport: '#2e86de', Housing: '#8e5bd4', Bills: '#f2a900',
   Health: '#17a589', Fun: '#d6409f', Shopping: '#5d7b8a', Other: '#9a8c7a',
@@ -17,7 +19,7 @@ export default function Donut({ data, size = 160, color }) {
 
   return (
     <div className="dn" style={{ width: size, height: size, boxShadow: color && total > 0 ? '0 0 8px ' + color + '44' : 'none', background: total > 0 ? 'conic-gradient(' + stops + ')' : '#262626' }}>
-      <b style={{ fontSize: Math.max(11, size * 0.13) }}>{total > 0 ? '$' + short(total) : '–'}</b>
+      <b style={{ fontSize: Math.max(11, size * 0.13) }}>{total > 0 ? cur() + short(total) : '–'}</b>
     </div>
   )
 }
