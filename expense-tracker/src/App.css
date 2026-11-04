@@ -120,3 +120,20 @@ body[data-side="closed"] .side .lbl { display: none; }
 .rm { background: none; border: 0; color: #999; text-decoration: underline; font-size: 0.8rem; padding: 0; }
 .bform { margin-top: 14px; }
 .ed { margin-left: auto; background: none; border: 0; color: #8fb0ff; font-size: 1.1rem; padding: 0 12px; }
+@media (min-width: 901px) {
+  #root:has(> .total), #root:has(> .ins) { max-width: 1040px; width: 100%; padding: 40px 32px 64px; }
+  #root:has(> .total) { display: grid; grid-template-columns: 340px 1fr; column-gap: 40px; align-items: start; }
+  #root:has(> .total) > h1 { grid-column: 1 / -1; text-align: left; }
+  #root:has(> .total) > form { grid-column: 1; grid-row: 2 / span 2; }
+  #root:has(> .total) > .msg { grid-column: 1; grid-row: 4; text-align: left; }
+  #root:has(> .total) > .total { grid-column: 2; grid-row: 2; text-align: left; margin-top: 0; }
+  #root:has(> .total) > ul, #root:has(> .total) > .empty { grid-column: 2; grid-row: 3; }
+}
+@media (min-width: 901px) {
+  .ins .stats { grid-template-columns: repeat(4, 1fr); }
+  .ins .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; }
+  .ins .cols:has(.mbars) { grid-template-columns: 240px 1fr; }
+  .minis { grid-template-columns: repeat(6, 1fr); }
+  .bigrow { width: auto; max-width: none; }
+  .ins:has(.who) { max-width: 640px; }
+}

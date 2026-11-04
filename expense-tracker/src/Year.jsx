@@ -28,7 +28,7 @@ export default function Year({ items }) {
         <b>{year}</b>
         <button disabled={year >= new Date().getFullYear()} onClick={() => setYear(year + 1)}>›</button>
       </div>
-      <Donut data={yearCats} size={170} />
+      <div className="cols"><div className="colA"><Donut data={yearCats} size={170} /></div><div className="colB">
       <h2>{t('Spent per month')}</h2>
       <div className="mbars">
         {perMonth.map((m, idx) => (
@@ -38,7 +38,7 @@ export default function Year({ items }) {
           </div>
         ))}
       </div>
-      <h2>{t('Each month')}</h2>
+      </div></div><h2>{t('Each month')}</h2>
       <div className="minis">
         {perMonth.map((m, idx) => (
           <div key={idx} className="mini"><Donut data={m.cats} size={64} color={MCOLORS[idx]} /><span>{MONTHS[idx]}</span></div>

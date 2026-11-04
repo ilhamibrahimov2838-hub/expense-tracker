@@ -38,7 +38,7 @@ export default function Insights({ items }) {
         <div><small>{t('Per day')}</small><b>{money(perDay)}</b></div>
         <div><small>{t('vs last month')}</small><b>{change === null ? '–' : (change > 0 ? '+' : '') + change + '%'}</b></div>
       </div>
-      <Donut data={byCat} size={200} /><h2>{t('By category')}</h2>
+      <div className="cols"><div className="colA"><Donut data={byCat} size={200} /><h2>{t('By category')}</h2>
       {cats.length === 0 && <p className="empty">{t('No spending in this month.')}</p>}
       {cats.map((c) => (
         <div key={c} className="catrow">
@@ -46,7 +46,7 @@ export default function Insights({ items }) {
           <div className="track"><div className="fillbar" style={{ width: (byCat[c] / total) * 100 + '%', background: COLORS[c] || '#888' }} /></div>
         </div>
       ))}
-      <Budgets byCat={byCat} /><h2>{t('Daily spending')}</h2>
+      </div><div className="colB"><Budgets byCat={byCat} /></div></div><h2>{t('Daily spending')}</h2>
       <div className="days">
         {daily.map((v, idx) => (
           <div key={idx} className="d" onClick={() => setSel(sel === idx ? null : idx)} title={t('Day') + ' ' + (idx + 1) + ': ' + money(v)}>
